@@ -53,7 +53,7 @@ function getColorForCategory(title: string) {
     'javascript': '#f7df1e',
     'ts': '#3178c6',
     'typescript': '#3178c6',
-    'mongodb': '#47a248',
+    'vuejs': '#42b883',
     'java': '#ed8b00',
     'product guides': '#3b82f6'
   }
@@ -65,7 +65,7 @@ function getColorForCategory(title: string) {
   if (key.includes('css')) return '#1572b6'
   if (key.includes('js') || key.includes('javascript')) return '#f7df1e'
   if (key.includes('ts') || key.includes('typescript')) return '#3178c6'
-  if (key.includes('mongo')) return '#47a248'
+  if (key.includes('vue')) return '#42b883'
   if (key.includes('java')) return '#ed8b00'
   
   return colors[key] || '#3b82f6'
@@ -85,7 +85,7 @@ function translateTitle(title: string) {
     'next.js': 'Next.js',
     'nuxt.js': 'Nuxt.js',
     'nuxt': 'Nuxt.js',
-    'mongodb': 'MongoDB',
+    'vuejs': 'Vuejs',
     'java': 'Java',
     'product guides': 'Panduan Produk',
     'introduction': 'Pendahuluan',
@@ -113,7 +113,7 @@ function getIconForCategory(title: string) {
     'nextjs': 'i-simple-icons-nextdotjs',
     'nuxt.js': 'i-simple-icons-nuxtdotjs',
     'nuxt': 'i-simple-icons-nuxtdotjs',
-    'mongodb': 'i-simple-icons-mongodb',
+    'vuejs': 'i-simple-icons-vuedotjs',
     'java': 'i-simple-icons-openjdk',
     'product guides': 'i-lucide-package'
   }
@@ -128,7 +128,7 @@ function getIconForCategory(title: string) {
   if (key.includes('ts') || key.includes('typescript')) return 'i-simple-icons-typescript'
   if (key.includes('laravel')) return 'i-simple-icons-laravel'
   if (key.includes('java')) return 'i-simple-icons-openjdk'
-  if (key.includes('mongo')) return 'i-simple-icons-mongodb'
+  if (key.includes('vue')) return 'i-simple-icons-vuedotjs'
   
   return icons[key] || 'i-lucide-book'
 }

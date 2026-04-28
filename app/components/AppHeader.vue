@@ -11,12 +11,12 @@ const currentDocsNavigation = computed(() => {
 })
 
 const frameworks = [
-  { label: 'Nuxt', to: '/docs/nuxt/getting-started', icon: 'i-simple-icons-nuxtdotjs' },
-  { label: 'Laravel', to: '/docs/laravel/getting-started', icon: 'i-simple-icons-laravel' },
-  { label: 'Next.js', to: '/docs/nextjs/getting-started', icon: 'i-simple-icons-nextdotjs' },
-  { label: 'HTML/CSS/JS', to: '/docs/html/getting-started', icon: 'i-lucide-code' }
+  { label: 'Nuxt', to: '/docs/nuxt', icon: 'i-simple-icons-nuxtdotjs' },
+  { label: 'Laravel', to: '/docs/laravel', icon: 'i-simple-icons-laravel' },
+  { label: 'Next.js', to: '/docs/nextjs', icon: 'i-simple-icons-nextdotjs' },
+  { label: 'Vuejs', to: '/docs/vuejs', icon: 'i-simple-icons-vuedotjs' },
+  { label: 'HTML/CSS/JS', to: '/docs/html', icon: 'i-lucide-code' }
 ]
-
 // Use new auth composable (no database)
 const { user, isLoggedIn, logout } = useAuth()
 
@@ -143,10 +143,10 @@ const megaMenuData = {
         desc: 'Framework React untuk produksi'
       },
       {
-        title: 'MongoDB',
-        to: '/docs/mongodb',
-        icon: 'i-lucide-database',
-        desc: 'Database NoSQL untuk aplikasi modern'
+        title: 'Vuejs',
+        to: '/docs/vuejs',
+        icon: 'i-simple-icons-vuedotjs',
+        desc: 'Framework JavaScript yang progresif dan populer'
       },
       {
         title: 'Java',
