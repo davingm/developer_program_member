@@ -144,10 +144,10 @@ watch(() => props.active, (isActive) => {
 
         <!-- Col 2: Company Links -->
         <div class="mega-column space-y-8 border-r border-white/5 pr-12">
-          <h3 class="text-xs font-bold uppercase tracking-widest text-primary-500 font-mono">
-            Perusahaan
-          </h3>
-          <div class="space-y-5">
+          <div v-if="data.company && data.company.length > 0" class="space-y-5 mb-8">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-primary-500 font-mono mb-8">
+              Perusahaan
+            </h3>
             <NuxtLink
               v-for="link in data.company"
               :key="link.label"
@@ -194,10 +194,11 @@ watch(() => props.active, (isActive) => {
             Artikel Pilihan
           </h3>
           <NuxtLink
-            to="/blog"
-            class="group/article space-y-4 bg-white/[0.02] border border-white/5 p-5 rounded-xl hover:bg-white/[0.05] transition-colors"
+            :to="data.featured.to || '/blog'"
+            class="group/article block space-y-4 transition-colors"
           >
             <img
+              v-if="data.featured.image"
               :src="data.featured.image"
               class="w-full aspect-video object-cover rounded-lg grayscale group-hover/article:grayscale-0 transition-all duration-500 shadow-2xl"
             >

@@ -2,7 +2,14 @@
 const route = useRoute()
 
 const { data: page } = await useAsyncData('blog', () => queryCollection('blog').first())
-const { data: posts } = await useAsyncData(route.path, () => queryCollection('posts').all())
+const { data: posts } = await useAsyncData(route.path, async () => {
+  const allPosts = await queryCollection('posts').all()
+  return allPosts.sort((a, b) => {
+    const aVal = a.path || a.title || ''
+    const bVal = b.path || b.title || ''
+    return aVal.localeCompare(bVal, undefined, { numeric: true, sensitivity: 'base' })
+  })
+})
 
 const title = page.value?.seo?.title || page.value?.title
 const description = page.value?.seo?.description || page.value?.description
