@@ -32,33 +32,7 @@ const filteredNavigation = computed(() => {
     <DocsHeader />
 
     <UMain>
-      <UContainer>
-        <UPage>
-          <template #left>
-            <UPageAside class="hidden lg:block border-r border-white/5 pr-4">
-              <template #top>
-                <div class="mb-6">
-                  <UContentSearchButton
-                    :collapsed="false"
-                    label="Cari..."
-                    class="w-full"
-                  />
-                </div>
-              </template>
-
-              <UContentNavigation
-                :navigation="filteredNavigation"
-                highlight
-                class="text-sm"
-              />
-            </UPageAside>
-          </template>
-
-          <div class="py-6 sm:py-8 lg:py-10">
-            <slot />
-          </div>
-        </UPage>
-      </UContainer>
+      <slot />
     </UMain>
 
     <AppFooter />
