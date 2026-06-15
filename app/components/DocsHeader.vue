@@ -40,15 +40,15 @@ const frameworks = computed(() => [
   },
   {
     label: 'Next.js',
-    to: '/docs/next.js/getting-started',
+    to: '/docs/nextjs/getting-started',
     icon: 'i-simple-icons-nextdotjs',
-    active: route.path.startsWith('/docs/next.js')
+    active: route.path.startsWith('/docs/nextjs')
   },
   {
-    label: 'MongoDB',
-    to: '/docs/mongodb/getting-started',
-    icon: 'i-simple-icons-mongodb',
-    active: route.path.startsWith('/docs/mongodb')
+    label: 'Vuejs',
+    to: '/docs/vuejs',
+    icon: 'i-simple-icons-vuedotjs',
+    active: route.path.startsWith('/docs/vuejs')
   },
   {
     label: 'Java',

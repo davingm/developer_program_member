@@ -11,12 +11,12 @@ const currentDocsNavigation = computed(() => {
 })
 
 const frameworks = [
-  { label: 'Nuxt', to: '/docs/nuxt/getting-started', icon: 'i-simple-icons-nuxtdotjs' },
-  { label: 'Laravel', to: '/docs/laravel/getting-started', icon: 'i-simple-icons-laravel' },
-  { label: 'Next.js', to: '/docs/nextjs/getting-started', icon: 'i-simple-icons-nextdotjs' },
-  { label: 'HTML/CSS/JS', to: '/docs/html/getting-started', icon: 'i-lucide-code' }
+  { label: 'Nuxt', to: '/docs/nuxt', icon: 'i-simple-icons-nuxtdotjs' },
+  { label: 'Laravel', to: '/docs/laravel', icon: 'i-simple-icons-laravel' },
+  { label: 'Next.js', to: '/docs/nextjs', icon: 'i-simple-icons-nextdotjs' },
+  { label: 'Vuejs', to: '/docs/vuejs', icon: 'i-simple-icons-vuedotjs' },
+  { label: 'HTML/CSS/JS', to: '/docs/html', icon: 'i-lucide-code' }
 ]
-
 // Use new auth composable (no database)
 const { user, isLoggedIn, logout } = useAuth()
 
@@ -44,7 +44,22 @@ const items = [
   { label: 'Blog', to: '/blog' }
 ]
 
-const megaMenuData = {
+const { data: latestPost } = await useAsyncData('header-latest-post', async () => {
+  const allPosts = await queryCollection('posts').all()
+  if (!allPosts || allPosts.length === 0) return null
+  
+  return allPosts.sort((a, b) => {
+    const dateA = new Date(a.date).getTime()
+    const dateB = new Date(b.date).getTime()
+    if (!isNaN(dateA) && !isNaN(dateB)) return dateB - dateA
+    
+    const aVal = a.path || a.title || ''
+    const bVal = b.path || b.title || ''
+    return bVal.localeCompare(aVal, undefined, { numeric: true, sensitivity: 'base' })
+  })[0]
+})
+
+const megaMenuData = computed(() => ({
   Acara: {
     upcoming: [
       { date: '22 APR', title: 'NLFTs Workshop Jakarta', desc: 'SCBD, Jakarta Selatan' },
@@ -70,99 +85,43 @@ const megaMenuData = {
   'Sumber Daya': {
     categories: [
       {
-        title: 'Memulai',
-        to: '/docs/getting-started',
-        icon: 'i-lucide-rocket',
-        desc: 'Mulai perjalanan development Anda',
-        items: [
-          { label: 'Pendahuluan', to: '/docs/getting-started' },
-          { label: 'Protokol', to: '/docs/getting-started/protokol' },
-          { label: 'Lisensi', to: '/docs/getting-started/lisensi' }
-        ]
+        title: 'Blog',
+        to: '/blog',
+        icon: 'i-lucide-newspaper',
+        desc: 'Baca artikel terbaru kami'
       },
       {
-        title: 'HTML',
-        to: '/docs/html',
-        icon: 'i-lucide-code',
-        desc: 'Pelajari HTML dari dasar hingga mahir',
-        items: [
-          { label: 'Memulai', to: '/docs/html/getting-started' },
-          { label: 'Pustaka', to: '/docs/html/pustaka' }
-        ]
+        title: 'Agensi',
+        to: '/agency',
+        icon: 'i-lucide-briefcase',
+        desc: 'Layanan agensi profesional'
       },
       {
-        title: 'CSS',
-        to: '/docs/css',
-        icon: 'i-lucide-palette',
-        desc: 'Styling dan design dengan CSS',
-        items: [
-          { label: 'Dasar-dasar', to: '/docs/css/fundamentals' },
-          { label: 'Lanjutan', to: '/docs/css/advanced' }
-        ]
+        title: 'DevLovers',
+        to: '/devlovers',
+        icon: 'i-lucide-heart',
+        desc: 'Komunitas developer'
       },
       {
-        title: 'JavaScript',
-        to: '/docs/js',
-        icon: 'i-lucide-zap',
-        desc: 'Programming dengan JavaScript',
-        items: [
-          { label: 'Dasar-dasar', to: '/docs/js/basics' },
-          { label: 'ES6+', to: '/docs/js/es6' }
-        ]
+        title: 'Legal',
+        to: '/legal',
+        icon: 'i-lucide-scale',
+        desc: 'Informasi legal dan kebijakan'
       },
       {
-        title: 'TypeScript',
-        to: '/docs/ts',
-        icon: 'i-lucide-shield',
-        desc: 'Development JavaScript yang aman dengan tipe',
-        items: [
-          { label: 'Pendahuluan', to: '/docs/ts/introduction' },
-          { label: 'Tipe Lanjutan', to: '/docs/ts/advanced' }
-        ]
+        title: 'Enterprise',
+        to: '/enterprise',
+        icon: 'i-lucide-building',
+        desc: 'Solusi untuk perusahaan'
       },
       {
-        title: 'Nuxt.js',
-        to: '/docs/nuxt',
-        icon: 'i-lucide-layers',
-        desc: 'Framework Vue.js full-stack',
-        items: [
-          { label: 'Persiapan', to: '/docs/nuxt/setup' },
-          { label: 'Komponen', to: '/docs/nuxt/components' }
-        ]
-      },
-      {
-        title: 'Laravel',
-        to: '/docs/laravel',
-        icon: 'i-lucide-server',
-        desc: 'Framework PHP untuk artisan web'
-      },
-      {
-        title: 'Next.js',
-        to: '/docs/nextjs',
-        icon: 'i-lucide-triangle',
-        desc: 'Framework React untuk produksi'
-      },
-      {
-        title: 'MongoDB',
-        to: '/docs/mongodb',
-        icon: 'i-lucide-database',
-        desc: 'Database NoSQL untuk aplikasi modern'
-      },
-      {
-        title: 'Java',
-        to: '/docs/java',
-        icon: 'i-lucide-coffee',
-        desc: 'Bahasa pemrograman enterprise'
+        title: 'Docs',
+        to: '/docs',
+        icon: 'i-lucide-book-open-text',
+        desc: 'Dokumentasi lengkap'
       }
     ],
-    company: [
-      { label: 'Blog', to: '/blog', icon: 'i-lucide-newspaper' },
-      { label: 'Agensi', to: '/agency', icon: 'i-lucide-briefcase' },
-      { label: 'DevLovers', to: '/devlovers', icon: 'i-lucide-heart' },
-      { label: 'Legal', to: '/legal', icon: 'i-lucide-scale' },
-      { label: 'Enterprise', to: '/enterprise', icon: 'i-lucide-building' },
-      { label: 'Docs', to: '/docs', icon: 'i-lucide-book-open-text' }
-    ],
+    company: [],
     partners: [
       'Komunitas DevLovers',
       'OpenFoundry',
@@ -171,11 +130,18 @@ const megaMenuData = {
       'Sigma Design',
       'Redberry Apps'
     ],
-    featured: {
+    featured: latestPost.value ? {
+      image: (typeof latestPost.value.image === 'object' && latestPost.value.image !== null) ? (latestPost.value.image.src || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80') : (latestPost.value.image || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80'),
+      date: latestPost.value.date ? new Date(latestPost.value.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Baru Saja',
+      title: latestPost.value.title,
+      desc: latestPost.value.description,
+      to: latestPost.value.path
+    } : {
       image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
       date: '14 April 2026',
       title: 'Bagaimana Saya Membangun CRM Berbasis AI dengan NLFTs dalam Akhir Pekan',
-      desc: 'Bagaimana seorang pengembang freelance senior membangun MVP NLFTs lengkap dalam waktu kurang dari 48 jam menggunakan modul AI baru kami.'
+      desc: 'Bagaimana seorang pengembang freelance senior membangun MVP NLFTs lengkap dalam waktu kurang dari 48 jam menggunakan modul AI baru kami.',
+      to: '/blog'
     },
     socials: [
       { icon: 'i-simple-icons-github', href: 'https://github.com/nlfts' },
@@ -184,7 +150,7 @@ const megaMenuData = {
       { icon: 'i-simple-icons-linkedin', href: '#' }
     ]
   }
-}
+}))
 
 const activeMegaMenu = ref<string | null>(null)
 let timeout: ReturnType<typeof setTimeout> | null = null
@@ -288,12 +254,11 @@ setup(() => {
           />
         </NuxtLink>
 
-        <!-- Render Mega Menu if exists for this item -->
         <HeaderMegaMenu
           v-if="item.hasMega"
           :active="activeMegaMenu === item.label"
           :label="item.label"
-          :data="megaMenuData[item.label as keyof typeof megaMenuData]"
+          :data="megaMenuData[item.label as 'Acara' | 'Sumber Daya']"
           @mouseenter="handleMouseEnter(item.label, true)"
           @mouseleave="handleMouseLeave"
         />

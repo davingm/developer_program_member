@@ -45,19 +45,14 @@ const megaMenuData = {
   },
   'Sumber Daya': {
     categories: [
-      { title: 'Memulai', to: '/docs/getting-started', icon: 'i-lucide-rocket' },
-      { title: 'HTML', to: '/docs/html', icon: 'i-lucide-code' },
-      { title: 'CSS', to: '/docs/css', icon: 'i-lucide-palette' },
-      { title: 'JavaScript', to: '/docs/js', icon: 'i-lucide-zap' },
-      { title: 'TypeScript', to: '/docs/ts', icon: 'i-lucide-shield' },
-      { title: 'Nuxt.js', to: '/docs/nuxt', icon: 'i-lucide-layers' }
+      { title: 'Blog', to: '/blog', icon: 'i-lucide-newspaper' },
+      { title: 'Agensi', to: '/agency', icon: 'i-lucide-briefcase' },
+      { title: 'DevLovers', to: '/devlovers', icon: 'i-lucide-heart' },
+      { title: 'Legal', to: '/legal', icon: 'i-lucide-scale' },
+      { title: 'Enterprise', to: '/enterprise', icon: 'i-lucide-building' },
+      { title: 'Docs', to: '/docs', icon: 'i-lucide-book-open-text' }
     ],
-    company: [
-      { label: 'Blog', to: '/blog', icon: 'i-lucide-newspaper' },
-      { label: 'Agensi', to: '/agency', icon: 'i-lucide-briefcase' },
-      { label: 'DevLovers', to: '/devlovers', icon: 'i-lucide-heart' },
-      { label: 'Legal', to: '/legal', icon: 'i-lucide-scale' }
-    ]
+    company: []
   }
 }
 
